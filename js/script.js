@@ -1,4 +1,4 @@
-//ãåíåðàöèÿ èãð. ïîëÿ
+//генерация игр. поля
 var field = document.getElementById('field');
 var table = '';
 const minesN = 12;
@@ -182,6 +182,11 @@ function tobottom(x, y) {
 
 function showwarn(content) {
     [...document.getElementsByClassName('mine')].forEach((el) => el.classList.remove('closed'));
+    [...document.querySelectorAll('.mine.sus')].forEach((el) => {
+        el.classList.remove('sus');
+        el.style.boxShadow = '0 0 7px 0px inset forestgreen';
+    }
+    );
     end.style.backgroundImage = 'url(img/' + content + '.png)'
     end.style.display = 'block';
 }
@@ -191,15 +196,17 @@ cells = [...document.querySelectorAll('td')];
 var first = true;
 var end = document.getElementById('end');
 cells.forEach((el) => el.addEventListener('click', () => {
-    if (first == true) { //îòñëåæèâàíèå ïåðâîãî õîäà
+    if (first == true) { //отслеживание первого хода
         first = el.id;
         spawn(first);
     }
     if (el.classList.contains('sus') || el.classList.contains(''))
         return;
     if (el.classList.contains('mine')) {
+        document.getElementById('minesleft').innerHTML = 12 - document.querySelectorAll('.mine.sus').length;
         showwarn('lose');
         el.style.cssText = 'background-color: #C42828; background-image: url(img/stepmine.svg)';
+        return;
     }
     opencell(el);
     let x = parse(el.id)[0], y = parse(el.id)[1];
@@ -207,14 +214,25 @@ cells.forEach((el) => el.addEventListener('click', () => {
     toright(x, y);
     totop(x, y);
     tobottom(x, y);
-    if (opened ==  144 - minesN)
+    document.getElementById('cellsopened').innerHTML = opened;
+    if (opened == 144 - minesN) {
         showwarn('win');
+        document.getElementById('minesleft').innerHTML = 0;
+    }
 }));
+
+var minesleft = minesN;
 
 cells.forEach((el) => el.addEventListener('contextmenu', () => {
     if (first == true)
         return;
-    if (el.classList.contains('sus'))
+    if (el.classList.contains('sus')) {
         el.classList.remove('sus');
-    else el.classList.add('sus');
+        minesleft++;
+    }
+    else if (minesleft > 0) {
+        el.classList.add('sus');
+        minesleft--;
+    };
+    document.getElementById('minesleft').innerHTML = minesleft;
 }));
