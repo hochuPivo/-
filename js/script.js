@@ -1,4 +1,4 @@
-//ãåíåðàöèÿ èãð. ïîëÿ
+//Ã£Ã¥Ã­Ã¥Ã°Ã Ã¶Ã¨Ã¿ Ã¨Ã£Ã°. Ã¯Ã®Ã«Ã¿
 var field = document.getElementById('field');
 var table = '';
 const minesN = 12;
@@ -191,7 +191,7 @@ cells = [...document.querySelectorAll('td')];
 var first = true;
 var end = document.getElementById('end');
 cells.forEach((el) => el.addEventListener('click', () => {
-    if (first == true) { //îòñëåæèâàíèå ïåðâîãî õîäà
+    if (first == true) { //Ã®Ã²Ã±Ã«Ã¥Ã¦Ã¨Ã¢Ã Ã­Ã¨Ã¥ Ã¯Ã¥Ã°Ã¢Ã®Ã£Ã® ÃµÃ®Ã¤Ã 
         first = el.id;
         spawn(first);
     }
@@ -212,6 +212,8 @@ cells.forEach((el) => el.addEventListener('click', () => {
 }));
 
 cells.forEach((el) => el.addEventListener('contextmenu', () => {
+    if (first == true)
+        return;
     if (el.classList.contains('sus'))
         el.classList.remove('sus');
     else el.classList.add('sus');
