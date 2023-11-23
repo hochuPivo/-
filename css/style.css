@@ -1,4 +1,4 @@
-﻿body {
+body {
     padding: 10px 15px;
     margin: 0;
     font-family: Arial;
@@ -18,9 +18,18 @@
     user-select: none;
 }
 
+.game > div:first-child {
+    font-style: italic;
+    font-size: 17px;
+    padding: 5px;
+}
+    .game > div:first-child span {
+        padding-right: 5px;
+        font-style: normal;
+    }
+
 #field {
     border-spacing: 5px;
-
 }
 
 #end {
@@ -40,8 +49,8 @@
     transition: 0.4s;
 }
 
-#end:hover {
-    opacity: 0.2;
+#end:not(:hover) {
+    opacity: 0;
 }
 
 #field td {
