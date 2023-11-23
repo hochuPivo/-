@@ -1,0 +1,99 @@
+﻿body {
+    padding: 10px 15px;
+    margin: 0;
+    font-family: Arial;
+}
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.description {
+    font-size: 16px;
+}
+.game {
+    position: relative;
+    user-select: none;
+}
+
+#field {
+    border-spacing: 5px;
+
+}
+
+#end {
+    color: red;
+    font-size: 60px;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 777;
+    background: no-repeat center;
+    background-size: auto 200px;
+    -webkit-text-stroke: 1.5px white;
+    display: none;
+    transition: 0.4s;
+}
+
+#end:hover {
+    opacity: 0.2;
+}
+
+#field td {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #707070;
+    position: relative;
+}
+
+.closed {
+    background-color: #BBBBBB;
+    cursor: pointer;
+    
+}
+
+    .closed::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #BBBBBB;
+        pointer-events: none;
+
+    }
+
+.sus::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: #BBBBBB center no-repeat url(../img/sus.svg);
+    background-size: 25px 25px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.sus::after {
+    z-index: -1;
+}
+
+.mine {
+    background: center no-repeat url(../img/mine.svg);
+    background-size: 23px 23px;
+}
+
+.nearMine {
+    text-align: center;
+    font-size: 20px;
+    color: #707070;
+    font-weight: bold;
+}
